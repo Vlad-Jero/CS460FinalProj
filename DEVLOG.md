@@ -19,6 +19,12 @@ _I started by reading the assignment instructions and checking how the code and 
 
 ---
 
+## Entry 2 – May 14: Mapping
+
+_Wrote the precompuation logic. I decided which nodes need Dijkstra runs and how the distances should be stored. I chose the entrance and each relic as source nodes because the route search only needs costs from the start and from relic to relic. I used a nested dictionary for the distance table so the search can quickly look up costs. I implemented Dijkstra with a priority queue._
+
+---
+
 ## Entry 2 – [Date]: [Short description]
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
