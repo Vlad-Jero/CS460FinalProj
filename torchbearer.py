@@ -146,10 +146,19 @@ def dijkstra_invariant_check():
     str
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
-
-    TODO
     """
-    return "TODO"
+    return (
+        "- Once a node is finalized, its distance value is locked in as the cheapest possible distance "
+        "from the source and we are sure there is no better path that exists.\n"
+        "- These nodes can still improve, their current distance value is the best path found so far based on finalized nodes.\n"
+        "Before the first loop, no nodes have been finalized and the source starts at distance 0. "
+        "- Every other node starts at infinity, which is technically the shortest path in an empty set of finalized nodes.\n"
+        "- By always picking the node with the smallest current distance, we ensure it's finalized because "
+        "nonnegative edge weights mean no future path could ever loop back and be cheaper than the one we just found.\n"
+        "- When the priority queue is empty, every reachable node has been finalized with its confirmed shortest path distance.\n"
+        "- Correct shortest path distances matter because the route planner uses those distances to compare relic orders and "
+        "choose the lowest fuel route to ensure the torchbearerr does not run out fuel before the exit."
+    )
 
 
 # =============================================================================

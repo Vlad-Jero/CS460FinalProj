@@ -82,19 +82,19 @@
 > One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+  _Before the first loop, no nodes have been finalized and the source starts at distance 0. Every other node starts at infinity, which is technically the shortest path in an empty set of finalized nodes._
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+  _By always picking the node with the smallest current distance, we ensure it's finalized because nonnegative edge weights mean no future path could ever loop back and be cheaper than the one we just found._
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+  _When the priority queue is empty, every reachable node has been finalized with its confirmed shortest path distance._
 
 ### Part 3c: Why This Matters for the Route Planner
 
 > One sentence connecting correct distances to correct routing decisions.
 
-_Your answer here._
+_Correct shortest path distances matter because the route planner uses those distances to compare relic orders and choose the lowest fuel route to ensure the torchbearerr does not run out fuel before the exit._
 
 ---
 
