@@ -33,10 +33,15 @@ def explain_problem():
         Must match what you wrote in README Part 1.
     """
     return (
+        "Part 1: Problem Analysis\n"
+        "--------------------------\n"
+        "1. Why a single shortest-path run from S is not enough:\n"
         "- A standard shortest-path algorithm can find the cheapest way to reach one specific spot, "
         "but cannot determine which relic should be visited first and so on to minimize the overall journey. "
         "It lacks the logic to decide which relic to grab first, second, etc to make the entire trip more efficient.\n"
+        "2. What decision remains after all inter-location costs are known:\n"
         "- After knowing the cheapst travel costs, we still have to figure out the best order to visit them.\n"
+        "3. Why this requires a search over orders (one sentence):\n"
         "- This problem requires a search over orders because different relic orders can have different total costs "
         "even when we know the distance from point to point."
     )
@@ -88,7 +93,7 @@ def run_dijkstra(graph, source):
     """
     dist = {}
 
-    #Start every node as unreachable
+    # Start every node as unreachable
     for node in graph:
         dist[node] = float('inf')
 
@@ -148,14 +153,22 @@ def dijkstra_invariant_check():
         Must match what you wrote in README Part 3.
     """
     return (
+        "Part 3: Algorithm Correctness\n"
+        "--------------------------\n"
+        "3a - 1. For nodes already finalized (in S):\n"
         "- Once a node is finalized, its distance value is locked in as the cheapest possible distance "
         "from the source and we are sure there is no better path that exists.\n"
+        "3a - 2. For nodes not yet finalized (not in S):\n"
         "- These nodes can still improve, their current distance value is the best path found so far based on finalized nodes.\n"
+        "3b - 1. Initialization : why the invariant holds before iteration 1:\n"
         "- Before the first loop, no nodes have been finalized and the source starts at distance 0. "
         "- Every other node starts at infinity, which is technically the shortest path in an empty set of finalized nodes.\n"
+        "3b - 2. Maintenance : why finalizing the min-dist node is always correct:\n"
         "- By always picking the node with the smallest current distance, we ensure it's finalized because "
         "nonnegative edge weights mean no future path could ever loop back and be cheaper than the one we just found.\n"
+        "3b - 3. Termination : what the invariant guarantees when the algorithm ends:\n"
         "- When the priority queue is empty, every reachable node has been finalized with its confirmed shortest path distance.\n"
+        "3c. Why Correctness Matters:\n"
         "- Correct shortest path distances matter because the route planner uses those distances to compare relic orders and "
         "choose the lowest fuel route to ensure the torchbearerr does not run out fuel before the exit."
     )
@@ -174,7 +187,11 @@ def explain_search():
         Must match what you wrote in README Part 4.
     """
     return (
+        "Part 4: Search Design\n"
+        "--------------------------\n"
+        "1. The failure mode:\n"
         "- A greedy strategy only looks at the next closest relic and ignores how that choice might lead to a dead end or an expensive path later in the sequence.\n"
+        "2. Counter-example setup:\n"
         "- Using this example table, assume we have 2 algoritms; greedy and optimal.\n"
         "| From / To | B   | C   | D   | T   |\n"
         "|-----------|-----|-----|-----|-----|\n"
@@ -182,11 +199,15 @@ def explain_search():
         "| B         | --  | 100 | 1   | 1   |\n"
         "| C         | 1   | --  | 100 | 100 |\n"
         "| D         | 1   | 1   | --  | 1   |\n"
+        "3. What greedy picks:\n"
         "- Greedy picks S -> B -> D -> C -> T which ends up costing 1+1+1+100 = 103\n"
+        "4. What optimal picks:\n"
         "- Optimal picks S - > C -> B -> D -> T which ends up costing 2+1+1+1 =5.\n"
+        "5. Why greedy loses:\n"
         "- Greedy only considers the next move and saving fuel there making it choose S -> B "
         "instead of C or D. This single choice already locks it in place to end up choosing 100 fuel to get to T. "
         "Choosing to use an extra 1 fuel at the start saves having to use 100 in the end.\n"
+        "6. What the algorithm must explore:\n"
         "- It must explore different relic orders as the order is what determines the total fuel cost."
     )
 
@@ -218,7 +239,7 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
     relics_visited_order = []
     cost_so_far = 0
 
-    #Best stores lowest cost found, best relic order for that cost
+    # Best stores lowest cost found, best relic order for that cost
     best = [float('inf'), []]
 
     _explore(
@@ -262,11 +283,11 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    #Stop this branch if it is already worse than the best complete route
+    # Stop this branch if it is already worse than the best complete route
     if cost_so_far >= best[0]:
         return
 
-    #Base case
+    # Base case
     if not relics_remaining:
         exit_cost = dist_table[current_loc][exit_node]
 
@@ -281,7 +302,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
 
         return
 
-    #Find the cheapest next move
+    # Find the cheapest next move
     cheapest_next = min(
         dist_table[current_loc][relic]
         for relic in relics_remaining
@@ -296,7 +317,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     if lower_bound >= best[0]:
         return
 
-    #Try each remaining relic as the next relic in the order
+    # Try each remaining relic as the next relic in the order
     for relic in list(relics_remaining):
         travel_cost = dist_table[current_loc][relic]
 
@@ -316,7 +337,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
             best
         )
 
-        #Undo the choice so the next branch starts clean
+        # Undo the choice so the next branch starts clean
         relics_visited_order.pop()
         relics_remaining.add(relic)
 
