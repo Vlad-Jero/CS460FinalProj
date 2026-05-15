@@ -105,17 +105,25 @@ _Correct shortest path distances matter because the route planner uses those dis
 > State the failure mode. Then give a concrete counter-example using specific node names
 > or costs (you may use the illustration example from the spec). Three to five bullets.
 
-- **The failure mode:** _Your answer here._
-- **Counter-example setup:** _Your answer here._
-- **What greedy picks:** _Your answer here._
-- **What optimal picks:** _Your answer here._
-- **Why greedy loses:** _Your answer here._
+- **The failure mode:** _A greedy strategy only looks at the next closest relic and ignores how that choice might lead to a dead end or an expensive path later in the sequence._
+- **Counter-example setup:** _Using this example table, assume we have 2 algoritms; greedy and optimal._
+
+| From \ To | B   | C   | D   | T   |
+|-----------|-----|-----|-----|-----|
+| S         | 1   | 2   | 2   | --  |
+| B         | --  | 100 | 1   | 1   |
+| C         | 1   | --  | 100 | 100 |
+| D         | 1   | 1   | --  | 1   |
+
+- **What greedy picks:** _Greedy picks S -> B -> D -> C -> T which ends up costing 1+1+1+100 = 103._
+- **What optimal picks:** _Optimal picks S - > C -> B -> D -> T which ends up costing 2+1+1+1 =5._
+- **Why greedy loses:** _Greedy only considers the next move and saving fuel there making it choose S -> B instead of C or D. This single choice already locks it in place to end up choosing 100 fuel to get to T. Choosing to use an extra 1 fuel at the start saves having to use 100 in the end._
 
 ### What the Algorithm Must Explore
 
 > One bullet. Must use the word "order."
 
-- _Your answer here._
+- _It must explore different relic orders as the order is what determines the total fuel cost._
 
 ---
 

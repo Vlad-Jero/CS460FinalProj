@@ -151,7 +151,7 @@ def dijkstra_invariant_check():
         "- Once a node is finalized, its distance value is locked in as the cheapest possible distance "
         "from the source and we are sure there is no better path that exists.\n"
         "- These nodes can still improve, their current distance value is the best path found so far based on finalized nodes.\n"
-        "Before the first loop, no nodes have been finalized and the source starts at distance 0. "
+        "- Before the first loop, no nodes have been finalized and the source starts at distance 0. "
         "- Every other node starts at infinity, which is technically the shortest path in an empty set of finalized nodes.\n"
         "- By always picking the node with the smallest current distance, we ensure it's finalized because "
         "nonnegative edge weights mean no future path could ever loop back and be cheaper than the one we just found.\n"
@@ -172,10 +172,22 @@ def explain_search():
     str
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
-
-    TODO
     """
-    return "TODO"
+    return (
+        "- A greedy strategy only looks at the next closest relic and ignores how that choice might lead to a dead end or an expensive path later in the sequence.\n"
+        "- Using this example table, assume we have 2 algoritms; greedy and optimal.\n"
+        "| From \ To | B   | C   | D   | T   |\n"
+        "|-----------|-----|-----|-----|-----|\n"
+        "| S         | 1   | 2   | 2   | --  |\n"
+        "| B         | --  | 100 | 1   | 1   |\n"
+        "| C         | 1   | --  | 100 | 100 |\n"
+        "| D         | 1   | 1   | --  | 1   |\n"
+        "- Greedy picks S -> B -> D -> C -> T which ends up costing 1+1+1+100 = 103\n"
+        "- Optimal picks S - > C -> B -> D -> T which ends up costing 2+1+1+1 =5.\n"
+        "- Greedy only considers the next move and saving fuel there making it choose S -> B "
+        "instead of C or D. This single choice already locks it in place to end up choosing 100 fuel to get to T. "
+        "Choosing to use an extra 1 fuel at the start saves having to use 100 in the end."
+    )
 
 
 # =============================================================================

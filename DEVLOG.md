@@ -25,12 +25,12 @@ _Wrote the precompuation logic. I decided which nodes need Dijkstra runs and how
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 3 – May 14: Wrong assumption with table
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
+_To answer part 4 I had to create a counter example to show greedy fail. I intended to use the example table provided in assignment.md as instrctions stated we can use it, however I came across an issue when tracing the nodes and realised there was an error in the example routes and that the specific table layout was actually perfect for greedy, which would not serve as a counter example. I modified the table; changing C -> T to be value 100 instead of 1, and then changed D -> T to be 1 instead of 100. This modified table showed how greedy can fail and how much better the optimal solution was. Using the provided table would not have been satisfactory to answer part 4._
 
 ---
 
