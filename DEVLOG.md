@@ -34,22 +34,22 @@ _To answer part 4 I had to create a counter example to show greedy fail. I inten
 
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 4 – May 14: Route search and prune implementation
 
-_Your entry here._
+_I implemented the recursive search for parts 5 and 6 by tracking the current location, remaining relics, visited order, and cost so far. At first, I considered only checking the best so far value after a full route reached the exit, but that would still waste time exploring branches that were already too expensive. I changed the design so the search stops early when the current cost or lower bound estimate cannot beat the best route already found. This final version still considers the relic orders needed to find the best route but it avoids continuing down branches that cannot possibly improve the answer._
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 5 – May 14: Post-Implementation Reflection
 
 > Required. Written after your implementation is complete. Describe what you would
 > change or improve given more time.
 
-_Your entry here._
+_After finishing the implementation, I tested the full pipeline using the provided tests in torchbearer.py. If I had more time I would improve the pruning by using a stronger lower bound estimate such as considering more of the remaining relic to relic costs instead of only the cheapest next move. I would also consider returning the full room by room path, not just the ordered relic list, since Dijkstra currently gives the costs but does not reconstruct the actual paths. Overall, the main design works by precomputing shortest paths first, then searching relic orders while cutting off branches that cannot beat the best route found._
 
 ---
 
-## Final Entry – [Date]: Time Estimate
+## Final Entry – May 14: Time Estimate
 
 > Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
 
